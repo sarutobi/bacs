@@ -1,6 +1,7 @@
 package base.ui;
 
 import base.engine.BattleField;
+import base.engine.BattleFieldFactory;
 import base.engine.MoveIterator;
 import base.Settings;
 
@@ -58,7 +59,6 @@ public final class MainFrame extends JFrame {
                 run = true;
                 start.setEnabled(false);
                 stop.setEnabled(true);
-//                battleField.init(50, "FF0000", 0, settings.strength, settings.mutagen, settings.end);
                 new Thread(() -> startAutoMove()).start();
             }
         });
@@ -72,6 +72,7 @@ public final class MainFrame extends JFrame {
                 stop.setEnabled(false);
             }
         });
+
         buttons.add(start);
         buttons.add(stop);
         add(buttons, BorderLayout.SOUTH);
@@ -90,7 +91,10 @@ public final class MainFrame extends JFrame {
 
     private void startAutoMove() {
         Settings settings = settingsPane.getSettings();
-        BattleField battleField = new BattleField(settings.dimension, settings.lumus);
+        BattleFieldFactory battleFieldFactory = new BattleFieldFactory();
+        BattleField battleField = settings.lumus
+                ? battleFieldFactory.getLumusField(settings.dimension) : battleFieldFactory.getEqualField(settings.dimension);
+
         battleField.init(50, "FF0000", 0, settings.strength, settings.mutagen, settings.end);
         playField.setBattleField(battleField);
         playField.setScale(settings.scale);

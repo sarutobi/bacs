@@ -18,16 +18,18 @@ public final class Engine {
     private final String EMPTY_CELL = "000000";
     private final String CORPSE_CELL = "FFFFFF";
 
-    private final BattleField battleField;
+    private final BattleFieldFactory battleFieldFactory;
+
+    private BattleField battleField;
 
     private final ActionField actionField;
 
-    private final Canvas display;
+//    private final Canvas display;
 
     Engine() {
-        this.battleField = new BattleField(0);
+        this.battleFieldFactory = new BattleFieldFactory();
         this.actionField = new ActionField(0);
-        this.display = new Canvas(battleField, 1);
+//        this.display = new Canvas(battleField, 1);
     }
 
     void process(int x, int y) {

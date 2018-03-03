@@ -9,17 +9,6 @@ import base.Command;
  */
 public class BattleField {
 
-    public static BattleField getEqualField(int dimension) {
-        BattleField field = new BattleField(dimension);
-        int halfsize = dimension / 2;
-
-        return field;
-    }
-
-    public static BattleField getLumusField(int dimension) {
-        return null;
-    }
-
     private final BacUnit[] cells;
 
     private boolean lumus;
@@ -53,30 +42,27 @@ public class BattleField {
         this.halfSize = dimension / 2;
         cells = new BacUnit[dimension * dimension];
         this.lumus = lumus;
+        for (int i = 0; i < dimension * dimension; i++) {
+            BacUnit bu = new BacUnit();
+            bu.clr = "000000";
+            cells[i] = bu;
+        }
     }
 
     public BattleField(int dimension) {
-        this(dimension, true);
+        this.dimension = dimension;
+        cells = new BacUnit[dimension * dimension];
+        for (int i = 0; i < dimension * dimension; i++) {
+            BacUnit bu = new BacUnit();
+            bu.clr = "000000";
+            cells[i] = bu;
+        }
     }
 
     /**
      * Инициализация стартовой позиции
      */
     public void init(int energy, String color, int direction, int strength, int mutagen, int end) {
-
-        for (int i = 0; i < dimension * dimension; i++) {
-                BacUnit bu = new BacUnit();
-                bu.clr = "000000";
-                if (lumus) {
-                    bu.light = calculateLight(i, halfSize, halfSize);
-                } else {
-                    bu.light = 1;
-                }
-                bu.behaviour = new int[23];
-                bu.changed = true;
-            cells[i] = bu;
-        }
-
         BacUnit initial = getCell(halfSize, halfSize);
         initial.clr = color;
         initial.direction = direction;

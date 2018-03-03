@@ -6,6 +6,9 @@ import base.engine.BattleField;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Отображение состояния игрового поля.
+ */
 public final class Canvas extends JComponent {
 
     private int dimension;
@@ -25,12 +28,10 @@ public final class Canvas extends JComponent {
     }
 
 
-   private Graphics2D g2d;
-
     @Override
     public void paintComponent(Graphics g) {
 
-        g2d = (Graphics2D) g;
+        Graphics2D g2d = (Graphics2D) g;
 
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
@@ -66,7 +67,14 @@ public final class Canvas extends JComponent {
 
     void setScale(int scale) {
         this.scale = scale;
-        this.dimension = battleField.getDimension();
+        resize();
+    }
+
+    void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+
+    private void resize() {
         this.size = new Dimension(dimension * scale, dimension * scale);
         setSize(size);
     }
@@ -74,7 +82,6 @@ public final class Canvas extends JComponent {
     void setBattleField(BattleField battleField) {
         this.battleField = battleField;
         this.dimension = battleField.getDimension();
-        this.size = new Dimension(dimension * scale, dimension * scale);
-        setSize(size);
+        resize();
     }
 }

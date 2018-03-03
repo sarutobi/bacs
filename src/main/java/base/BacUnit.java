@@ -1,43 +1,55 @@
 package base;
 
 public class BacUnit {
-    static int actlim = 20; //maximum number of actions
-    static int comnum = 6; //number of commands available
-    static int relsense = 5; //how much relative can differ
-    static int gainbase = 5; //energy gained with gain ability
+    public static int actlim = 20; //maximum number of actions
+    public static int comnum = 6; //number of commands available
+    public static int relsense = 5; //how much relative can differ
+    public static int gainbase = 5; //energy gained with gain ability
 
     public boolean changed;
     // Параметры клетки
-    int str;
-    int end;
-    int mut;
-    String clr;
+    public int str;
+    public int end;
+    public int mut;
+    public String clr;
 
-    float energy;
-    double light; // Освещеннойсть клетки
-    int direction; // Направление перемещения или атаки
-    int action = 0; // Номер отрабатываемой команды
+    public float energy;
+    public double light; // Освещеннойсть клетки
+    public int direction; // Направление перемещения или атаки
+    public int action = 0; // Номер отрабатываемой команды
 
-    int ticks; //Время жизни клетки в ходах
-    int[] behaviour = new int[23]; // последовательность действий клетки
+    public int ticks; //Время жизни клетки в ходах
+    public int[] behaviour = new int[23]; // последовательность действий клетки
 
+    public static BacUnit getInitial(int strength, int mutagen, int end) {
+        BacUnit initial = new BacUnit();
+        initial.clr = "#FF0000";
+        initial.direction = 0;
+        initial.str = strength;
+        initial.mut = mutagen;
+        initial.end = end;
+        initial.energy = 50;
+        initial.behaviour[0] = Command.GAIN.getCode();
+        initial.changed = true;
+        return initial;
+    }
 
-    BacUnit() {
+    public BacUnit() {
         this.clr = "000000";
     }
 
-    int getMyAction() {
+    public int getMyAction() {
         action %= actlim;
         int actionCode = behaviour[action];
         action++;
         return actionCode;
     }
 
-    void gain() {
+    public void gain() {
         energy += gainbase * light;
     }
 
-    void turn(int dir) {
+    public void turn(int dir) {
         if (dir % 2 == 0) {
             direction = (direction + 1) % 8;
         } else {

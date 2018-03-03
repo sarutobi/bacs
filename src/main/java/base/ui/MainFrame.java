@@ -1,7 +1,7 @@
 package base.ui;
 
-import base.BattleField;
-import base.MoveIterator;
+import base.engine.BattleField;
+import base.engine.MoveIterator;
 import base.Settings;
 
 import javax.swing.*;
@@ -82,6 +82,10 @@ public final class MainFrame extends JFrame {
 
         pack();
         setVisible(true);
+    }
+
+    private void initField() {
+
     }
 
     private void startAutoMove() {

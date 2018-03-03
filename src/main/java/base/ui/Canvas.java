@@ -1,12 +1,12 @@
 package base.ui;
 
 import base.BacUnit;
-import base.BattleField;
+import base.engine.BattleField;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Canvas extends JComponent {
+public final class Canvas extends JComponent {
 
     private int dimension;
 
@@ -16,7 +16,7 @@ public class Canvas extends JComponent {
 
     private BattleField battleField;
 
-    Canvas(BattleField battleField, int scale) {
+    public Canvas(BattleField battleField, int scale) {
         this.battleField = battleField;
         this.dimension = battleField.getDimension();
         this.scale = scale;

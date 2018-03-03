@@ -1,4 +1,7 @@
-package base;
+package base.engine;
+
+import base.BacUnit;
+import base.ui.Canvas;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,14 +14,20 @@ import static base.utils.Random.getRandomColorCode;
  * Основной класс движка
  * Created by valera on 10.03.17.
  */
-final class Engine {
+public final class Engine {
     private final String EMPTY_CELL = "000000";
     private final String CORPSE_CELL = "FFFFFF";
 
-    private BattleField battleField;
+    private final BattleField battleField;
 
-    Engine(BattleField battleField) {
-        this.battleField = battleField;
+    private final ActionField actionField;
+
+    private final Canvas display;
+
+    Engine() {
+        this.battleField = new BattleField(0);
+        this.actionField = new ActionField(0);
+        this.display = new Canvas(battleField, 1);
     }
 
     void process(int x, int y) {

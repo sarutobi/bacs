@@ -1,9 +1,9 @@
-package base;
+package base.engine;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static base.utils.Random.*;
+import static base.utils.Random.getRandom;
 
 /**
  * Created by valera on 09.03.17.
@@ -20,7 +20,7 @@ public class MoveIterator {
     public MoveIterator(BattleField battleField) {
         this.dimension = battleField.getDimension();
         this.battleField = battleField;
-        this.engine = new Engine(battleField);
+        this.engine = new Engine();
         totalCell = dimension * dimension;
     }
 

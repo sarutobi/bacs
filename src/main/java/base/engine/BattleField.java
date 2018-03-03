@@ -1,10 +1,24 @@
-package base;
+package base.engine;
+
+import base.BacUnit;
+import base.Command;
 
 /**
  * Игровое поле.
  * Created by valera on 08.03.17.
  */
 public class BattleField {
+
+    public static BattleField getEqualField(int dimension) {
+        BattleField field = new BattleField(dimension);
+        int halfsize = dimension / 2;
+
+        return field;
+    }
+
+    public static BattleField getLumusField(int dimension) {
+        return null;
+    }
 
     private final BacUnit[] cells;
 
@@ -32,13 +46,17 @@ public class BattleField {
     }
 
     private final int dimension;
-    private final int halfSize;
+    private int halfSize;
 
     public BattleField(int dimension, boolean lumus) {
         this.dimension = dimension;
         this.halfSize = dimension / 2;
         cells = new BacUnit[dimension * dimension];
         this.lumus = lumus;
+    }
+
+    public BattleField(int dimension) {
+        this(dimension, true);
     }
 
     /**

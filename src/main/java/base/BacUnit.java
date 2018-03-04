@@ -1,8 +1,8 @@
 package base;
 
 public class BacUnit {
-    public static int actlim = 20; //maximum number of actions
-    public static int comnum = 6; //number of commands available
+    public static int actlim = 20;  //maximum number of actions
+    public static int comnum = 6;   //number of commands available
     public static int relsense = 5; //how much relative can differ
     public static int gainbase = 5; //energy gained with gain ability
 
@@ -14,8 +14,8 @@ public class BacUnit {
     public String clr;
 
     public float energy;
-    public double light; // Освещеннойсть клетки
-    public int direction; // Направление перемещения или атаки
+    public double light;   // Освещеннойсть клетки
+    public int direction;  // Направление перемещения или атаки
     public int action = 0; // Номер отрабатываемой команды
 
     public int ticks; //Время жизни клетки в ходах

@@ -11,7 +11,7 @@ import static base.utils.Random.getRandom;
 public class MoveIterator {
     private final BattleField battleField;
 
-    private final Engine engine;
+//    private final Engine engine;
 
     private final int dimension;
 
@@ -20,7 +20,7 @@ public class MoveIterator {
     public MoveIterator(BattleField battleField) {
         this.dimension = battleField.getDimension();
         this.battleField = battleField;
-        this.engine = new Engine();
+//        this.engine = new Engine();
         totalCell = dimension * dimension;
     }
 
@@ -31,7 +31,7 @@ public class MoveIterator {
             int y = getRandom(0, dimension - 1);
             processed.add(y * dimension + x);
             if ((! battleField.getCell(x, y).clr.equals("000000")) && (!battleField.getCell(x, y).clr.equals("FFFFFF"))) {
-                engine.process(x, y);
+//                engine.process(x, y);
             }
         }
     }

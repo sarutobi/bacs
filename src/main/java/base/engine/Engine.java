@@ -1,6 +1,7 @@
 package base.engine;
 
 import base.BacUnit;
+import base.Settings;
 import base.ui.Canvas;
 
 import java.util.ArrayList;
@@ -24,9 +25,12 @@ public final class Engine {
 
     private final ActionField actionField;
 
+    private final Settings settings;
+
 //    private final Canvas display;
 
-    Engine() {
+    Engine(Settings settings) {
+        this.settings = settings;
         this.battleFieldFactory = new BattleFieldFactory();
         this.actionField = new ActionField(0);
 //        this.display = new Canvas(battleField, 1);

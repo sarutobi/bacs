@@ -5,6 +5,8 @@ import base.engine.BattleField;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Отображение состояния игрового поля.
@@ -19,34 +21,26 @@ public final class Canvas extends JComponent {
 
     private BattleField battleField;
 
-    public Canvas(BattleField battleField, int scale) {
-        this.battleField = battleField;
-        this.dimension = battleField.getDimension();
+
+    private List<Square> squares = Collections.emptyList();
+
+    Canvas(int dimension, int scale) {
+        this.dimension = dimension;
         this.scale = scale;
         size = new Dimension(dimension * scale, dimension * scale);
         setSize(size);
+        clearDisplay();
     }
 
 
     @Override
     public void paintComponent(Graphics g) {
-
         Graphics2D g2d = (Graphics2D) g;
 
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                BacUnit current = battleField.getCell(i, j);
-
-                g2d.setPaint(Color.decode("#" + current.getColorCode()));
-
-                if (scale > 3) {
-                    g2d.drawRect(i * scale, j * scale, scale - 1, scale - 1);
-                    g2d.fillRect(i * scale, j * scale, scale - 1, scale - 1);
-                } else {
-                    g2d.drawRect(i * scale, j * scale, scale - 1, scale - 1);
-                }
-                current.changed = false;
-            }
+        for (Square square : squares) {
+            g2d.setPaint(square.getColor());
+            g2d.drawRect(square.getX(), square.getY(), square.getSize(), square.getSize());
+            g2d.fillRect(square.getX(), square.getY(), square.getSize(), square.getSize());
         }
     }
 
@@ -77,11 +71,14 @@ public final class Canvas extends JComponent {
     private void resize() {
         this.size = new Dimension(dimension * scale, dimension * scale);
         setSize(size);
+        clearDisplay();
     }
 
-    void setBattleField(BattleField battleField) {
-        this.battleField = battleField;
-        this.dimension = battleField.getDimension();
-        resize();
+    public void clearDisplay() {
+        squares = Collections.singletonList(new Square(0, 0, dimension * scale, Color.black));
+    }
+
+    public void setSquares(List<Square> squares) {
+        this.squares = squares;
     }
 }

@@ -19,7 +19,7 @@ public final class MainFrame extends JFrame {
 
 //    private final BattleField battleField;
 
-    private final Canvas playField;
+    private final Canvas displayComponent;
 
     private final Settings settings;
 
@@ -35,16 +35,13 @@ public final class MainFrame extends JFrame {
     public MainFrame(String title, Settings settings) {
         super(title);
         this.settings = settings;
-        BattleField battleField = new BattleField(settings.dimension, settings.lumus);
-        battleField.init(50, "FF0000", 0, settings.strength, settings.mutagen, settings.end);
-        playField = new Canvas(battleField, settings.scale);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        displayComponent = new Canvas(settings.dimension, settings.scale);
 
         progress = new JProgressBar(JProgressBar.VERTICAL);
 
         JPanel canvasPanel = new JPanel(new BorderLayout(), true);
         canvasPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-        canvasPanel.add(playField, BorderLayout.CENTER);
+        canvasPanel.add(displayComponent, BorderLayout.CENTER);
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.add(canvasPanel, BorderLayout.CENTER);
         contentPanel.add(settingsPane, BorderLayout.EAST);
@@ -78,11 +75,12 @@ public final class MainFrame extends JFrame {
         add(buttons, BorderLayout.SOUTH);
         stop.setEnabled(false);
 
-        timer = new Timer(40, e1 -> playField.repaint());
+        timer = new Timer(40, e1 -> displayComponent.repaint());
         settingsPane.setSettings(settings);
 
         pack();
         setVisible(true);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void initField() {
@@ -96,8 +94,8 @@ public final class MainFrame extends JFrame {
                 ? battleFieldFactory.getLumusField(settings.dimension) : battleFieldFactory.getEqualField(settings.dimension);
 
         battleField.init(50, "FF0000", 0, settings.strength, settings.mutagen, settings.end);
-        playField.setBattleField(battleField);
-        playField.setScale(settings.scale);
+        //displayComponent.setBattleField(battleField);
+        //displayComponent.setScale(settings.scale);
         pack();
         MoveIterator moveIterator = new MoveIterator(battleField);
 

@@ -27,7 +27,6 @@ public final class Engine {
 
     private final Settings settings;
 
-//    private final Canvas display;
 
     Engine(Settings settings) {
         this.settings = settings;

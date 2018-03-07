@@ -3,8 +3,9 @@ package base.engine;
 import base.BacUnit;
 
 import java.awt.*;
+import java.util.Optional;
 
-public final class BattleFieldSquare {
+public final class BattleFieldCell {
 
     private final int x;
 
@@ -16,7 +17,7 @@ public final class BattleFieldSquare {
 
     private BacUnit occupant;
 
-    public BattleFieldSquare(int x, int y, double light) {
+    public BattleFieldCell(int x, int y, double light) {
         this.x = x;
         this.y = y;
         this.light = light;
@@ -41,4 +42,11 @@ public final class BattleFieldSquare {
         return empty ? Color.black : Color.decode("#" + occupant.clr);
     }
 
+    public double getLight() {
+        return light;
+    }
+
+    public Optional<BacUnit> getOccupant() {
+        return empty ? Optional.empty() : Optional.of(occupant);
+    }
 }

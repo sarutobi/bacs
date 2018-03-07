@@ -9,7 +9,7 @@ import base.Command;
  */
 public class BattleField {
 
-    private final BacUnit[] cells;
+    private final BattleFieldCell[] cells;
 
     private boolean lumus;
 
@@ -35,51 +35,24 @@ public class BattleField {
     }
 
     private final int dimension;
-    private int halfSize;
 
-    public BattleField(int dimension, boolean lumus) {
+
+    private BattleField(int dimension, boolean lumus) {
         this.dimension = dimension;
-        this.halfSize = dimension / 2;
-        cells = new BacUnit[dimension * dimension];
         this.lumus = lumus;
-        for (int i = 0; i < dimension * dimension; i++) {
-            BacUnit bu = new BacUnit();
-            bu.clr = "000000";
-            cells[i] = bu;
-        }
+        cells = new BattleFieldCell[dimension * dimension];
     }
 
-    public BattleField(int dimension) {
-        this.dimension = dimension;
-        cells = new BacUnit[dimension * dimension];
-        for (int i = 0; i < dimension * dimension; i++) {
-            BacUnit bu = new BacUnit();
-            bu.clr = "000000";
-            cells[i] = bu;
-        }
-    }
+    BattleField(int dimension) {
+        this(dimension, false);
 
-    /**
-     * Инициализация стартовой позиции
-     */
-    public void init(int energy, String color, int direction, int strength, int mutagen, int end) {
-        BacUnit initial = getCell(halfSize, halfSize);
-        initial.clr = color;
-        initial.direction = direction;
-        initial.str = strength;
-        initial.mut = mutagen;
-        initial.end = end;
-        initial.energy = energy;
-        initial.behaviour[0] = Command.GAIN.getCode();
-        initial.changed = true;
     }
-
 
     private Coords normalize(int x, int y) {
         return new Coords((x + dimension) % dimension, (y + dimension) % dimension);
     }
 
-    public BacUnit getCell(int x, int y) {
+    public BattleFieldCell getCell(int x, int y) {
         Coords req = normalize(x, y);
         return cells[req.x + req.y * dimension];
     }
@@ -88,21 +61,4 @@ public class BattleField {
         return dimension;
     }
 
-    /**
-     * Расчет коэффициента освещенности клетки поля.
-     *
-     * @param i  индекс клетки
-     * @param xc x-координата источника освещения
-     * @param yc y-координата источника освещения
-     * @return рассчитанный коэффициент клетки поля
-     */
-    private double calculateLight(int i, int xc, int yc) {
-        int x = i % dimension;
-        int y = i / dimension;
-        int dx = xc - x;
-        int dy = yc - y;
-        double delta = Math.sqrt(dx * dx + dy * dy);
-        double maxDistance = Math.sqrt(2) * xc;
-        return (maxDistance - delta) / maxDistance;
-    }
 }

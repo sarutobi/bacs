@@ -6,8 +6,10 @@ public final class BattleFieldFactory {
         BattleField field = new BattleField(dimension);
 
         for (int x = 0; x < dimension; x++)
-            for (int y = 0; y < dimension; y++)
-                field.getCell(x, y).light = 1;
+            for (int y = 0; y < dimension; y++){
+
+            }
+//                field.getCell(x, y).light = 1;
 
         return field;
     }
@@ -23,7 +25,7 @@ public final class BattleFieldFactory {
                 int dx = center - x;
                 int dy = center - y;
                 double delta = Math.sqrt(dx * dx + dy * dy);
-                field.getCell(x, y).light = (maxDistance - delta) / maxDistance;
+//                field.getCell(x, y).light = (maxDistance - delta) / maxDistance;
             }
         return field;
     }

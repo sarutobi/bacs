@@ -5,3 +5,4 @@
 build/
 endgame.txt
 !/.gitignore
+*.iml

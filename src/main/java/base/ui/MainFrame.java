@@ -93,7 +93,7 @@ public final class MainFrame extends JFrame {
         BattleField battleField = settings.lumus
                 ? battleFieldFactory.getLumusField(settings.dimension) : battleFieldFactory.getEqualField(settings.dimension);
 
-        battleField.init(50, "FF0000", 0, settings.strength, settings.mutagen, settings.end);
+        //battleField.init(50, "FF0000", 0, settings.strength, settings.mutagen, settings.end);
         //displayComponent.setBattleField(battleField);
         //displayComponent.setScale(settings.scale);
         pack();

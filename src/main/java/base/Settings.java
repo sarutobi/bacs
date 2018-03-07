@@ -1,5 +1,9 @@
 package base;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -22,6 +26,16 @@ public class Settings {
 
     String behaviour;
 
+    private final Subject<Integer> dimensionValue;
+
+    public Settings() {
+        dimensionValue = PublishSubject.create();
+    }
+
+    public Subject<Integer> getDimension() {
+        return dimensionValue;
+    }
+
     static Settings fromProperties(String name) throws IOException {
         Settings settings = new Settings();
         Properties props = new Properties();
@@ -32,6 +46,8 @@ public class Settings {
             settings.cores = Runtime.getRuntime().availableProcessors() / 2;
 
         settings.dimension = Integer.valueOf(props.getProperty("settings.dimension", "150"));
+        settings.dimensionValue.onNext(settings.dimension);
+
         settings.scale = Integer.valueOf(props.getProperty("settings.scale", "1"));
         settings.maxIterations = Integer.valueOf(props.getProperty("settings.iterations", "10000"));
         settings.lumus = Boolean.valueOf(props.getProperty("settings.light", "true"));

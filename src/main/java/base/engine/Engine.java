@@ -28,7 +28,7 @@ public final class Engine {
     private final Settings settings;
 
 
-    Engine(Settings settings) {
+    public Engine(Settings settings) {
         this.settings = settings;
         this.battleFieldFactory = new BattleFieldFactory();
         this.actionField = new ActionField(0);

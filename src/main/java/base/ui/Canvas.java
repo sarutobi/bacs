@@ -2,6 +2,11 @@ package base.ui;
 
 import base.BacUnit;
 import base.engine.BattleField;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.internal.observers.DisposableLambdaObserver;
+import io.reactivex.observers.DisposableObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,14 +26,34 @@ public final class Canvas extends JComponent {
 
     private BattleField battleField;
 
+    private Observer<Integer> dimensionObserver;
 
     private List<Square> squares = Collections.emptyList();
 
-    Canvas(int dimension, int scale) {
-        this.dimension = dimension;
+    Canvas(final Observable<Integer> dimensionSource, int scale) {
+//        this.dimension = dimension;
         this.scale = scale;
-        size = new Dimension(dimension * scale, dimension * scale);
-        setSize(size);
+        dimensionObserver = new DisposableObserver<Integer>() {
+            @Override
+            public void onNext(Integer integer) {
+                setDimension(integer);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
+
+        dimensionSource.subscribe(dimensionObserver);
+
+//        size = new Dimension(dimension * scale, dimension * scale);
+//        setSize(size);
         clearDisplay();
     }
 
@@ -66,6 +91,7 @@ public final class Canvas extends JComponent {
 
     void setDimension(int dimension) {
         this.dimension = dimension;
+        resize();
     }
 
     private void resize() {

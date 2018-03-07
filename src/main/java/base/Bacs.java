@@ -1,5 +1,6 @@
 package base;
 
+import base.engine.Engine;
 import base.ui.MainFrame;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class Bacs {
 
     public static void main(String[] args) throws IOException {
         settings = Settings.fromProperties("conf.properties");
+        Engine engine = new Engine(settings);
         SwingUtilities.invokeLater(() -> window = new MainFrame(title, settings));
     }
 }

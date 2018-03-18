@@ -13,26 +13,26 @@ public class MoveIterator {
 
 //    private final Engine engine;
 
-    private final int dimension;
+//    private final int dimension;
 
-    private final int totalCell;
+//    private final int totalCell;
 
     public MoveIterator(BattleField battleField) {
-        this.dimension = battleField.getDimension();
+//        this.dimension = battleField.getDimension();
         this.battleField = battleField;
 //        this.engine = new Engine();
-        totalCell = dimension * dimension;
+//        totalCell = dimension * dimension;
     }
 
     public void nextMove() {
-        Set<Integer> processed = new HashSet<>(totalCell);
-        while (processed.size() < totalCell) {
-            int x = getRandom(0, dimension - 1);
-            int y = getRandom(0, dimension - 1);
-            processed.add(y * dimension + x);
+//        Set<Integer> processed = new HashSet<>(totalCell);
+//        while (processed.size() < totalCell) {
+//            int x = getRandom(0, dimension - 1);
+//            int y = getRandom(0, dimension - 1);
+//            processed.add(y * dimension + x);
 //            if ((! battleField.getCell(x, y).clr.equals("000000")) && (!battleField.getCell(x, y).clr.equals("FFFFFF"))) {
 //                engine.process(x, y);
 //            }
-        }
+//        }
     }
 }

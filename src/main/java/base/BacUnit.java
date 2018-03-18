@@ -14,7 +14,6 @@ public class BacUnit {
     public String clr;
 
     public float energy;
-    public double light;   // Освещеннойсть клетки
     public int direction;  // Направление перемещения или атаки
     public int action = 0; // Номер отрабатываемой команды
 
@@ -34,7 +33,7 @@ public class BacUnit {
         return initial;
     }
 
-    public BacUnit() {
+    private BacUnit() {
         this.clr = "000000";
     }
 
@@ -45,7 +44,7 @@ public class BacUnit {
         return actionCode;
     }
 
-    public void gain() {
+    public void gain(double light) {
         energy += gainbase * light;
     }
 

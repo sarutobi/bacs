@@ -73,7 +73,7 @@ public final class Engine {
                     nextMove = false;
                     break;
                 case 23:
-                    target.gain();
+                    target.gain(1.0);
                     nextMove = false;
                     break;
                 case 24:

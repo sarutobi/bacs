@@ -2,7 +2,7 @@ package base.ui;
 
 import base.engine.BattleField;
 import base.engine.BattleFieldFactory;
-import base.engine.MoveIterator;
+//import base.engine.MoveIterator;
 import base.Settings;
 
 import javax.swing.*;
@@ -35,7 +35,7 @@ public final class MainFrame extends JFrame {
     public MainFrame(String title, Settings settings) {
         super(title);
         this.settings = settings;
-        displayComponent = new Canvas(settings.dimension, settings.scale);
+        displayComponent = new Canvas(settings.getDimension(), settings.scale);
 
         progress = new JProgressBar(JProgressBar.VERTICAL);
 
@@ -97,7 +97,7 @@ public final class MainFrame extends JFrame {
         //displayComponent.setBattleField(battleField);
         //displayComponent.setScale(settings.scale);
         pack();
-        MoveIterator moveIterator = new MoveIterator(battleField);
+//        MoveIterator moveIterator = new MoveIterator(battleField);
 
         progress.setMinimum(0);
         progress.setMaximum(settings.maxIterations);
@@ -107,7 +107,7 @@ public final class MainFrame extends JFrame {
         while ((run) && (iternum < settings.maxIterations)) {
             iternum++;
             progress.setValue(iternum);
-            moveIterator.nextMove();
+//            moveIterator.nextMove();
         }
 
         start.setEnabled(true);

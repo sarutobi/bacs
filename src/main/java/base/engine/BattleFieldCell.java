@@ -3,30 +3,28 @@ package base.engine;
 import base.BacUnit;
 
 import java.awt.*;
-import java.util.Optional;
+import java.util.*;
+import java.util.List;
 
 public final class BattleFieldCell {
-
-    private final int x;
-
-    private final int y;
 
     private double light;
 
     private boolean empty;
 
+    // Кандидаты на размещение в клетке на следующем ходу.
+    private final List<BacUnit> candidates = new ArrayList<>(9);
+
+    // Соседи текущей клетки игрового поля
+    private final CellNeighbors neighbors = new CellNeighbors();
+
     private BacUnit occupant;
 
-    public BattleFieldCell(int x, int y, double light) {
-        this.x = x;
-        this.y = y;
-        this.light = light;
+    BattleFieldCell() {
         this.empty = true;
     }
 
     public void setOccuped(BacUnit occupant) throws IllegalStateException {
-        if (! empty)
-            throw new IllegalStateException("Ячейка уже занята!");
         this.occupant = occupant;
         this.empty = false;
     }
@@ -46,7 +44,11 @@ public final class BattleFieldCell {
         return light;
     }
 
-    public Optional<BacUnit> getOccupant() {
+    public void setLight(double light) {
+        this.light = light;
+    }
+
+    Optional<BacUnit> getOccupant() {
         return empty ? Optional.empty() : Optional.of(occupant);
     }
 }
